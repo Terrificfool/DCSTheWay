@@ -1,5 +1,4 @@
 import main.Waypoints.PlanesCommands.A10CII;
-import main.Waypoints.PlanesCommands.F16;
 import main.models.Hemisphere;
 import main.models.Point;
 import org.junit.jupiter.api.Test;

@@ -6,8 +6,9 @@ import main.Waypoints.WaypointManager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+//import java.awt.event.ActionListener;
+//import java.beans.PropertyChangeEvent;
+//import java.beans.PropertyChangeListener;
 import java.io.File;
 
 public class GUI {
@@ -19,6 +20,7 @@ public class GUI {
     static private JButton selectPointButton;
     static private JButton transferToDCSButton;
     static private JButton clearPointsButton;
+    static private TrayIcon trayIcon;
 
 
     public static void show(){
@@ -72,10 +74,34 @@ public class GUI {
         frame.setResizable(false);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setLocation(0, dim.height-frame.getHeight());
-        loadIcon();
+        loadGUIIcon();
         frame.setVisible(true);
-    }
 
+        PopupMenu popupMenu = new PopupMenu();
+        MenuItem showMenuItem = new MenuItem("Show");
+        showMenuItem.addActionListener(e -> {
+            frame.setVisible(true);
+        });
+        MenuItem exitMenuItem = new MenuItem("Exit");
+        exitMenuItem.addActionListener(e ->{
+            System.exit(0);
+        });
+
+        trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().getImage("resources/TheWayIcon16.png"));
+        popupMenu.add(showMenuItem);
+        popupMenu.add(exitMenuItem);
+        trayIcon.setPopupMenu(popupMenu);
+
+        if (SystemTray.isSupported() == true) {
+            frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            SystemTray systemTray = SystemTray.getSystemTray();
+            try {
+                systemTray.add(trayIcon);
+            } catch (AWTException e) {
+                e.printStackTrace();
+            }
+        }        
+    }
     public static void warning(String text){
         JDialog dialog = new JDialog(frame, "Heads up!", true);
         JButton continueButton = new JButton("Continue");
@@ -176,7 +202,8 @@ public class GUI {
         }
     }
 
-    private static void loadIcon() {
+
+    private static void loadGUIIcon() {
         String iconPath = "resources/TheWayIcon40.png";
         File iconFile = new File(iconPath);
         if (iconFile.exists()) {

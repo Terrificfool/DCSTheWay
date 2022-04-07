@@ -1,8 +1,8 @@
 import main.Waypoints.PlanesCommands.F16;
-import main.models.DMMCoordinate;
+//import main.models.DMMCoordinate;
 import main.models.Hemisphere;
 import main.models.Point;
-import org.junit.jupiter.api.Disabled;
+//import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

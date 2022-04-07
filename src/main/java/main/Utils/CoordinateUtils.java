@@ -3,7 +3,6 @@ package main.Utils;
 import main.models.*;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 public class CoordinateUtils {
     public static DMMCoordinate decimalToDMM(BigDecimal decimalCoordinate){

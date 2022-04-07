@@ -10,6 +10,7 @@ public class PortSender {
             Socket socket = new Socket("127.0.0.1", 42070);
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println(toSend);
+            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
